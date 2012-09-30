@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
+#import "ControlPadEventDelegate.h"
 
 #define MAX_CONTROL_PADS 4
 
 extern unsigned long padStatusForPadNumber(int which);
 
-@interface ControlPadManager : NSObject <GKSessionDelegate> {
+@interface ControlPadManager : NSObject <GKSessionDelegate, ControlPadEventDelegate> {
 	GKSession *gkSession;
 	
 	NSMutableArray *controlPadPeerIDs;

@@ -10,6 +10,7 @@
 #import "SNESControllerAppDelegate.h"
 #import "SNESControllerViewController.h"
 
+@class iCadeViewController;
 @class EmulationViewController;
 @class RomSelectionViewController;
 @class RomDetailViewController;
@@ -46,6 +47,7 @@
 @property (nonatomic, strong) ControlPadManager *controlPadManager;
 
 @property (nonatomic, strong) EmulationViewController *emulationViewController;
+@property (nonatomic, strong) iCadeViewController *iCadeViewController;
 @property (nonatomic, strong) WebBrowserViewController *webViewController;
 @property (nonatomic, strong) UINavigationController *webNavController;
 @property (strong, nonatomic) UITabBarController *tabBarController;

@@ -26,7 +26,7 @@ SNES4iOSAppDelegate *AppDelegate()
 @synthesize window, splitViewController, romSelectionViewController, romDetailViewController, settingsViewController;
 @synthesize controlPadConnectViewController, controlPadManager;
 @synthesize romDirectoryPath, saveDirectoryPath, snapshotDirectoryPath;
-@synthesize emulationViewController, webViewController, webNavController;
+@synthesize emulationViewController, iCadeViewController, webViewController, webNavController;
 @synthesize tabBarController;
 @synthesize snesControllerAppDelegate, snesControllerViewController;
 @synthesize sramDirectoryPath;
@@ -69,6 +69,11 @@ SNES4iOSAppDelegate *AppDelegate()
 	// Make the main emulator view controller
 	emulationViewController = [[EmulationViewController alloc] init];
 	emulationViewController.view.hidden = YES;
+    
+    // Construct and attach the iCade view controller into the emulation view controller's view hierarchy
+    [self setICadeViewController:[[iCadeViewController alloc] init]];
+    [[[self emulationViewController] view] addSubview:[[self iCadeViewController] view]];
+    [[self iCadeViewController] setDelegate:[self controlPadManager]];
 	
 	// Make the web browser view controller
 	webViewController = [[WebBrowserViewController alloc] initWithNibName:@"WebBrowserViewController" bundle:nil];

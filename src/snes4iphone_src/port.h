@@ -116,7 +116,7 @@ typedef short			int16_32;
 #define SLASH_CHAR '/'
 
 //Misc Items
-EXTERN_C void S9xGenerateSound ();
+//EXTERN_C void S9xGenerateSound ();
 
 //Misc Items
 //#define LSB_FIRST

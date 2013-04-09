@@ -82,7 +82,7 @@ unsigned int *screenPixels;
     self.affineTransform = CGAffineTransformIdentity;
     self.contents = nil;
     self.affineTransform = rotateTransform;
-    self.contents = (__bridge id) _surface;
+    self.contents = (id) _surface;
     IOSurfaceUnlock(_surface, 1, &_seed);
 }
 
@@ -96,7 +96,6 @@ unsigned int *screenPixels;
     } else if (orientation == UIDeviceOrientationPortrait) {
         rotateTransform = CGAffineTransformMakeRotation(RADIANS(0.0));
     }
-    
 }
 
 

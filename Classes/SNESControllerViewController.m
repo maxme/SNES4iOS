@@ -102,18 +102,18 @@ void rt_dispatch_sync_on_main_thread(dispatch_block_t block) {
     [ControllerAppDelegate().sessionController dismissView];
 }
 
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    if (ControllerAppDelegate().controllerType == SNESControllerTypeLocal) {
-        return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    }
-    else {
-        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || 
-                interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-    }
+- (BOOL)shouldAutorotate {
+    return NO;
 }
 
+- (NSUInteger) supportedInterfaceOrientations {
+	if(ControllerAppDelegate().controllerType == SNESControllerTypeLocal) {
+		return UIInterfaceOrientationMaskPortrait;
+	}
+	else {
+		return UIInterfaceOrientationMaskLandscape;
+	}
+}
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.

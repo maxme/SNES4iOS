@@ -3,6 +3,8 @@
 *.pbxuser
 *.perspectivev3
 
+.DS_Store
+
 # compiled object files
 *.o
 

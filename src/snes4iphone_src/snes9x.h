@@ -395,7 +395,7 @@ struct SSNESGameFixes
     uint8 SRAMInitialValue;
 };
 
-START_EXTERN_C
+//START_EXTERN_C
 extern struct SSettings Settings;
 extern struct SCPUState CPU;
 extern struct SSNESGameFixes SNESGameFixes;
@@ -404,7 +404,7 @@ extern char String [513];
 void S9xExit ();
 void S9xMessage (int type, int number, const char *message);
 void S9xLoadSDD1Data ();
-END_EXTERN_C
+//END_EXTERN_C
 
 enum {
     PAUSE_NETPLAY_CONNECT = (1 << 0),

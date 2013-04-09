@@ -215,7 +215,8 @@
 	self.romTitleButton.title = romTitleLabel.text;
 	self.romTitleLabel.hidden = NO;
 	
-	self.saveStateSelectionViewController.romFilter = romFile;
+	#warning needs to be tested on iPad
+	self.saveStateSelectionViewController.romFilter = self.romTitleLabel.text;
 	[self.saveStateSelectionViewController scanSaveDirectory];
 	self.saveStateSelectionViewController.view.hidden = NO;
 	self.snapshotImageView.hidden = YES;
@@ -310,7 +311,7 @@
 
 - (void)dealloc {
 	[saveStateSelectionViewController removeObserver:self forKeyPath:@"selectedSavePath"];
-    
+    [super dealloc];
 }
 
 @end

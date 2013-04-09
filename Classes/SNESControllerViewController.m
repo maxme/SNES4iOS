@@ -103,7 +103,10 @@ void rt_dispatch_sync_on_main_thread(dispatch_block_t block) {
 }
 
 - (BOOL)shouldAutorotate {
-    return NO;
+	if(ControllerAppDelegate().controllerType == SNESControllerTypeLocal)
+		return NO;
+	else
+		return YES;
 }
 
 - (NSUInteger) supportedInterfaceOrientations {

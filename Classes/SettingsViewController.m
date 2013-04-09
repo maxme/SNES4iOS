@@ -22,8 +22,6 @@
 unsigned long __fps_debug = 0;
 int iphone_soundon = 1;
 int __autosave = 0;
-int __transparency = 0;
-int __speedhack = 0;
 int __smooth_scaling = 0;
 
 SettingsViewController *SettingsController()
@@ -102,8 +100,6 @@ SettingsViewController *SettingsController()
 	
 	__fps_debug = [fpsDisplay isOn];
  	__autosave = [autosave isOn];
- 	__transparency = [transparency isOn];
- 	__speedhack = [speedHack isOn];
 	__smooth_scaling = [smoothScaling isOn];
     self.useiCloud = [iCloud isOn];
 	

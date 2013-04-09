@@ -41,9 +41,9 @@ extern "C" {
 #endif
 
 
-#define SNES_OPTIONS_DIR		""
-#define SNES_SRAM_DIR			""
-#define SNES_SAVESTATE_DIR		""
+#define SNES_OPTIONS_DIR		"options"
+#define SNES_SRAM_DIR			"sram"
+#define SNES_SAVESTATE_DIR		"saves"
 
 #define ROM_LIST_FILENAME			"romlist.bin"
 #define SRAM_FILE_EXT				"srm"

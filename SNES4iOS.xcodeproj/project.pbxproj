@@ -72,6 +72,8 @@
 		CEE8575D11AADBE100784F8D /* ArrowForward.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE8575B11AADBE100784F8D /* ArrowForward.png */; };
 		CEEA77CE119F3F4400440258 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEA77CD119F3F4400440258 /* ScreenView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CEEA77D1119F3F6100440258 /* ScreenLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEA77D0119F3F6100440258 /* ScreenLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E315EE001713EB9E00AE3879 /* AppIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E315EDFF1713EB9E00AE3879 /* AppIcon@2x.png */; };
+		E315EE021713EB9F00AE3879 /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = E315EE011713EB9F00AE3879 /* AppIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -193,6 +195,8 @@
 		CEEA77CD119F3F4400440258 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
 		CEEA77CF119F3F6100440258 /* ScreenLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenLayer.h; sourceTree = "<group>"; };
 		CEEA77D0119F3F6100440258 /* ScreenLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenLayer.m; sourceTree = "<group>"; };
+		E315EDFF1713EB9E00AE3879 /* AppIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon@2x.png"; sourceTree = "<group>"; };
+		E315EE011713EB9F00AE3879 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +264,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				E315EE011713EB9F00AE3879 /* AppIcon.png */,
+				E315EDFF1713EB9E00AE3879 /* AppIcon@2x.png */,
 				BFA4E4CA14A6EB31000AA7DA /* SNES4iOS.entitlements */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				CE43A4CC119DFEF70007E399 /* Resources */,
@@ -455,7 +461,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SNES4iOS" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -519,6 +525,8 @@
 				BFFFEABC14B7F21400B4B2C7 /* sustainButton@2x.png in Resources */,
 				BFFFEABF14B7F3D100B4B2C7 /* sustainButtonHighlighted@2x.png in Resources */,
 				BFFFEAC014B7F3D100B4B2C7 /* sustainButtonHighlighted.png in Resources */,
+				E315EE001713EB9E00AE3879 /* AppIcon@2x.png in Resources */,
+				E315EE021713EB9F00AE3879 /* AppIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +569,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = SNES4iOS_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = APP_BUILD;
@@ -587,7 +595,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = SNES4iOS_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = APP_BUILD;
@@ -611,6 +619,10 @@
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = SNES4iOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk/System/Library/PrivateFrameworks/;
@@ -618,6 +630,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_MASTER_OBJECT_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -637,7 +650,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"";
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = SNES4iOS_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = APP_BUILD;
@@ -661,6 +674,10 @@
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = SNES4iOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk/System/Library/PrivateFrameworks/;
@@ -668,6 +685,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_MASTER_OBJECT_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -683,6 +701,10 @@
 				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = SNES4iOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk/System/Library/PrivateFrameworks/;
@@ -690,6 +712,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_MASTER_OBJECT_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

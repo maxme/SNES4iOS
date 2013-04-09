@@ -11,6 +11,9 @@
 #import "ScreenView.h"
 #import "SNESControllerViewController.h"
 #import "ScreenLayer.h"
+#import "SaveStateSelectionViewController.h"
+#import "src/snes4iphone_src/snes9x.h"
+#import "src/snes4iphone_src/menu.h"
 
 #import <pthread.h>
 #import <QuartzCore/QuartzCore.h>
@@ -26,10 +29,7 @@ volatile int __emulation_saving;
 volatile int __emulation_paused;
 
 extern int iphone_main(char *filename);
-
-
-pthread_t main_tid;
-
+int __speedhack = 0;
 
 // C wrapper function for emulation core access
 void refreshScreenSurface()
@@ -50,12 +50,10 @@ void *threadedStart(NSString *completeFilePath)
 		iphone_main(filename);
 		__emulation_run = 0;
 		__emulation_saving = 0;
-		
     free(filename);
 	}
+	return 0;
 }
-
-
 
 extern unsigned short *vrambuffer;  // this holds the 256x224 framebuffer in L565 format
 
@@ -112,7 +110,7 @@ void saveScreenshotToFile(char *filepath)
 }
 
 @implementation EmulationViewController
-@synthesize pauseAlert;
+@synthesize pauseAlert, romfile;
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -178,7 +176,9 @@ void saveScreenshotToFile(char *filepath)
 }
 
 - (void)loadState:(id)sender {
-    
+	SaveStateSelectionViewController* saveStateViewController = [[SaveStateSelectionViewController alloc] initWithNibName:@"SaveStateSelectionViewControllerIphone" bundle:nil];
+	saveStateViewController.romFilter = romfile;
+	[AppDelegate().snesControllerViewController presentModalViewController:saveStateViewController animated:YES];
 }
 
 #pragma mark -
@@ -188,16 +188,28 @@ void saveScreenshotToFile(char *filepath)
     [AppDelegate() showEmulator:NO];
 }
 
+- (void) resume {
+	__emulation_paused = 0;
+}
+
 - (void) refreshScreen
 {
     //[(ScreenView *) self.view update];
     [self.view setNeedsDisplay];
 	//[self.view.layer setNeedsDisplay];
+	
+	//Hotfix for some settings
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if(Settings.Transparency != [defaults boolForKey:@"Transparency"])
+		Settings.Transparency = [defaults boolForKey:@"Transparency"];
+	if(snesMenuOptions.showFps != [defaults boolForKey:@"FPSDisplay"])
+		snesMenuOptions.showFps = [defaults boolForKey:@"FPSDisplay"];
+	if(__speedhack != [defaults boolForKey:@"SpeedHack"])
+		__speedhack = [defaults boolForKey:@"SpeedHack"];
 }
 
 - (void) startWithRom:(NSString *)romFile
 {
-    
     /*
     pthread_create(&main_tid, NULL, threadedStart, (void *) [[romFile lastPathComponent] UTF8String]);
 	
@@ -216,18 +228,8 @@ void saveScreenshotToFile(char *filepath)
     dispatch_release(dispatchQueue);
 }
 
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-                interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-    }
-    else {
-        return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    }
+- (BOOL)shouldAutorotate {
+	return NO;
 }
 
 - (void) didRotate:(NSNotification *)notification {
@@ -319,7 +321,7 @@ void saveScreenshotToFile(char *filepath)
     NSString *title = @"Select an option";
     NSString *destructiveButtonTitle = @"Quit Game";
     NSString *button1Title = @"Save State";
-    NSString *button2Title = @"Save State to New File";
+	NSString *button2Title = @"Load State";
     __emulation_paused = 1;
     //clearFramebuffer();
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -364,8 +366,8 @@ void saveScreenshotToFile(char *filepath)
 
 - (void)object:(id)object clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSInteger quitIndex = 0;
-    NSInteger saveCurrentIndex = 1;
-	NSInteger saveNewIndex = 2;
+	NSInteger saveNewIndex = 1;
+	NSInteger loadIndex = 2;
     //NSInteger cancelButtonIndex = 3;
     
     /*if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
@@ -377,16 +379,19 @@ void saveScreenshotToFile(char *filepath)
 	
 	if (buttonIndex == quitIndex) {
         NSLog(@"Quit button clicked");
-		__emulation_run = 0;
-//        [self performSelector:@selector(exit:) withObject:self afterDelay:1.0];
-	} else if (buttonIndex == saveCurrentIndex) {
-		NSLog(@"save to current file button clicked");
-		__emulation_saving = 2;
+		[[UIApplication sharedApplication] suspend];
+		sleep(1);
+		exit(0);
+//      self performSelector:@selector(exit:) withObject:self afterDelay:1.0];
 	} else if (buttonIndex == saveNewIndex) {
 		NSLog(@"save to new file button clicked");
 		__emulation_saving = 1;
+	} else if (buttonIndex == loadIndex) {
+		[self loadState:nil];
 	}
-    __emulation_paused = 0;
+	
+	if (buttonIndex != loadIndex)
+		__emulation_paused = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -403,9 +408,4 @@ void saveScreenshotToFile(char *filepath)
     // e.g. self.myOutlet = nil;
 }
 
-
-
-
 @end
-
-

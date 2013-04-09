@@ -113,8 +113,8 @@
 */
 
 // Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (BOOL)shouldAutorotate {
+		return YES;
 }
 
 
@@ -199,7 +199,7 @@
 	{
 		if(characterLUT[i] == 1)
 		{
-			NSString* characters = [NSString stringWithString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZ#"];
+			NSString* characters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ#";
 			NSString* characterIndex = [characters substringWithRange:NSMakeRange(i,1)];
 			[arrayOfCharacters addObject:characterIndex];
 			[objectsForCharacters setObject:arrayOfIndexedFiles[i] forKey:characterIndex];
@@ -400,6 +400,7 @@
         [AppDelegate().emulationViewController didRotate:[NSNotification notificationWithName:@"Notification" object:nil]];
         controllerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [UIApplication sharedApplication].statusBarHidden = YES;
+		AppDelegate().emulationViewController.romfile = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
         [self presentViewController:controllerViewController animated:YES completion:^{
             [AppDelegate().emulationViewController startWithRom:romPath];
             [AppDelegate() showEmulator:YES];

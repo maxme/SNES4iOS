@@ -55,15 +55,25 @@ SNES4iOSAppDelegate *AppDelegate()
     
 	NSString *documentsPath = [SNES4iOSAppDelegate applicationDocumentsDirectory];
     //	romDirectoryPath = [[documentsPath stringByAppendingPathComponent:@"ROMs/SNES/"] retain];
+    
 	self.romDirectoryPath = [documentsPath copy];
+    self.saveDirectoryPath = [documentsPath copy];
+    self.snapshotDirectoryPath = [documentsPath copy];
+    self.sramDirectoryPath = [documentsPath copy];
+    
+    //The way iTunes does folders is stupid, so why not just put them all in the same document path?
+    /*
 	self.saveDirectoryPath = [romDirectoryPath stringByAppendingPathComponent:@"saves"];
 	self.snapshotDirectoryPath = [saveDirectoryPath stringByAppendingPathComponent:@"snapshots"];
     self.sramDirectoryPath = [self.romDirectoryPath stringByAppendingPathComponent:@"sram"];
+     */
     
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    [fileManager createDirectoryAtPath:saveDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    //NSFileManager *fileManager = [[NSFileManager alloc] init];
+    
+    //Don't need this anymore.
+    /*[fileManager createDirectoryAtPath:saveDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
     [fileManager createDirectoryAtPath:snapshotDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
-    [fileManager createDirectoryAtPath:self.sramDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    [fileManager createDirectoryAtPath:self.sramDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];*/
     //Apple says its better to attempt to create the directories and accept an error than to manually check if they exist.
     
 	// Make the main emulator view controller
@@ -111,7 +121,6 @@ SNES4iOSAppDelegate *AppDelegate()
     
     return YES;
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Save data if appropriate

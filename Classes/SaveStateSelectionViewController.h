@@ -17,6 +17,7 @@
 	NSString *__weak selectedScreenshotPath;
 	
 	UIBarButtonItem *editButton;
+	UIBarButtonItem *cancelButton;
 
 	UITableView *saveTableView;
 }
@@ -26,6 +27,7 @@
 @property (nonatomic, copy) NSString *selectedScreenshotPath;
 @property (nonatomic, strong) IBOutlet UITableView *saveTableView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *editButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelButton;
 @property (strong, nonatomic) NSArray *saveFiles;
 
 - (void) scanSaveDirectory;

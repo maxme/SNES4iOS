@@ -13,7 +13,7 @@
 
 @implementation SaveStateSelectionViewController
 
-@synthesize romFilter, selectedSavePath, selectedScreenshotPath, saveTableView, editButton, cancelButton, saveFiles, isModal;
+@synthesize romFilter, selectedSavePath, selectedScreenshotPath, saveTableView, editButton, cancelButton, saveFiles;
 
 #pragma mark -
 #pragma mark View lifecycle

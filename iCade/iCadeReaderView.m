@@ -98,31 +98,8 @@ static const char *OFF_STATES = "eczqtrfnmpgv";
 
 - (void)insertText:(NSString *)text {
     
-    char ch = [text characterAtIndex:0];
-    char *p = strchr(ON_STATES, ch);
-    bool stateChanged = false;
-    if (p) {
-        int index = p-ON_STATES;
-        _iCadeState |= (1 << index);
-        stateChanged = true;
-        if (_delegateFlags.buttonDown) {
-            [_delegate buttonDown:(1 << index)];
-        }
-    } else {
-        p = strchr(OFF_STATES, ch);
-        if (p) {
-            int index = p-OFF_STATES;
-            _iCadeState &= ~(1 << index);
-            stateChanged = true;
-            if (_delegateFlags.buttonUp) {
-                [_delegate buttonUp:(1 << index)];
-            }
-        }
-    }
-
-    if (stateChanged && _delegateFlags.stateChanged) {
-        [_delegate stateChanged:_iCadeState];
-    }
+    char ch = [text characterAtIndex:0];    
+    [_delegate characterEntered:ch];
     
     static int cycleResponder = 0;
     if (++cycleResponder > 20) {

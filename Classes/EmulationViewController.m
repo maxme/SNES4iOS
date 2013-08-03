@@ -30,6 +30,7 @@ volatile int __emulation_paused;
 
 extern int iphone_main(char *filename);
 int __speedhack = 0;
+float __hudTransparency = 0.5f;
 
 // C wrapper function for emulation core access
 void refreshScreenSurface()
@@ -158,6 +159,7 @@ void saveScreenshotToFile(char *filepath)
 
 - (void)viewWillAppear:(BOOL)animated {
     [self didRotate:[NSNotification notificationWithName:@"RotateNotification" object:nil]];
+    [AppDelegate().snesControllerViewController.sustainButton removeFromSuperview];
 }
 
 #pragma mark - Save States
@@ -200,6 +202,7 @@ void saveScreenshotToFile(char *filepath)
 	
 	//Hotfix for some settings
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    __hudTransparency = [defaults boolForKey:@"HUDTransparency"];
 	if(Settings.Transparency != [defaults boolForKey:@"Transparency"])
 		Settings.Transparency = [defaults boolForKey:@"Transparency"];
 	if(snesMenuOptions.showFps != [defaults boolForKey:@"FPSDisplay"])
@@ -265,7 +268,7 @@ void saveScreenshotToFile(char *filepath)
                     AppDelegate().snesControllerViewController.imageView.frame = CGRectMake(0, 0, 320, 480);
                 }
                 [AppDelegate().snesControllerViewController changeBackgroundImage:@"landscape_controller"];
-                AppDelegate().snesControllerViewController.imageView.alpha = 0.5;
+                AppDelegate().snesControllerViewController.imageView.alpha = __hudTransparency;
             }
             [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeRight;
             //UIDeviceOrientationLandscapeLeft and UIInterfaceOrientationLandscapeLeft are NOT the same
@@ -288,7 +291,7 @@ void saveScreenshotToFile(char *filepath)
                     AppDelegate().snesControllerViewController.imageView.frame = CGRectMake(0, 0, 320, 480);
                 }
                 [AppDelegate().snesControllerViewController changeBackgroundImage:@"landscape_controller"];
-                AppDelegate().snesControllerViewController.imageView.alpha = 0.5;
+                AppDelegate().snesControllerViewController.imageView.alpha = __hudTransparency;
             }
             [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationLandscapeLeft;
             rotationAngle = 180.0f;

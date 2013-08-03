@@ -44,6 +44,7 @@
 - (void)stateChanged:(iCadeState)state;
 - (void)buttonDown:(iCadeState)button;
 - (void)buttonUp:(iCadeState)button;
+- (void)characterEntered:(char)ch;
 
 @end
 

@@ -14,6 +14,7 @@
 #define USER_DEFAULT_KEY_SMOOTH_SCALING @"SmoothScaling"
 #define USER_DEFAULT_KEY_FPS_DISPLAY @"FPSDisplay"
 #define USER_DEFAULT_KEY_TRANSPARENCY @"Transparency"
+#define USER_DEFAULT_KEY_HUDTRANSPARENCY @"HUDTransparency"
 #define USER_DEFAULT_KEY_SPEED_HACK @"SpeedHack"
 #define USER_DEFAULT_KEY_MULTI_TAP @"MultiTap"
 #define USER_DEFAULT_KEY_AUTOCONNECT @"Autoconnect"
@@ -69,6 +70,7 @@ SettingsViewController *SettingsController()
 	[autoconnect setOn:[defaults boolForKey:USER_DEFAULT_KEY_AUTOCONNECT]];
     [iCloud setOn:[defaults boolForKey:USER_DEFAULT_KEY_ICLOUD]];
     [iCloud setEnabled:iCloudEnabled];
+    [_hudTransparency setValue:[defaults boolForKey:USER_DEFAULT_KEY_HUDTRANSPARENCY]];
 	
 	[self settingChanged:nil];
 }	
@@ -91,9 +93,11 @@ SettingsViewController *SettingsController()
 	else if (sender == multiTap) defaultKey = USER_DEFAULT_KEY_MULTI_TAP;
 	else if (sender == autoconnect) defaultKey = USER_DEFAULT_KEY_AUTOCONNECT;
     else if (sender == iCloud) defaultKey = USER_DEFAULT_KEY_ICLOUD;
+    else if (sender == _hudTransparency) defaultKey = USER_DEFAULT_KEY_HUDTRANSPARENCY;
 	
-	if (defaultKey)
-	{
+    if (defaultKey && [defaultKey isEqualToString:USER_DEFAULT_KEY_HUDTRANSPARENCY]) {
+        [[NSUserDefaults standardUserDefaults] setFloat:_hudTransparency.value forKey:defaultKey];
+    } else if (defaultKey) {
 		UISwitch *toggle = (UISwitch *)sender;
 		[[NSUserDefaults standardUserDefaults] setBool:[toggle isOn] forKey:defaultKey];
 	}

@@ -108,7 +108,7 @@ unsigned long padStatusForPadNumber(int which)
 	NSUInteger padNumber = [controlPadPeerIDs indexOfObject:peer];
     [self convertData:data padNumber:padNumber];
     
-	//NSLog(@"recieved pad status for player %d: %X", padNumber + 1, padStatus[padNumber]);
+	NSLog(@"recieved pad status for player %d: %lX", padNumber + 1, padStatus[padNumber]);
 }
 
 - (void)convertData:(NSData *)data padNumber:(NSUInteger)padNumber {
@@ -133,7 +133,6 @@ unsigned long padStatusForPadNumber(int which)
 
 #pragma mark -
 #pragma mark ControlPadEventDelegate
-
 enum  { GP2X_UP=0x1,       GP2X_LEFT=0x4,       GP2X_DOWN=0x10,  GP2X_RIGHT=0x40,
 	GP2X_START=1<<8,   GP2X_SELECT=1<<9,    GP2X_L=1<<10,    GP2X_R=1<<11,
 	GP2X_A=1<<12,      GP2X_B=1<<13,        GP2X_X=1<<14,    GP2X_Y=1<<15,
@@ -162,9 +161,11 @@ enum  { GP2X_UP=0x1,       GP2X_LEFT=0x4,       GP2X_DOWN=0x10,  GP2X_RIGHT=0x40
             break;
         case ControlPadStateUp:
             stateInGP2XValue = GP2X_UP;
+            NSLog(@"UP p=%d", pressed);
             break;
         case ControlPadStateDown:
             stateInGP2XValue = GP2X_DOWN;
+            NSLog(@"DOWN p=%d", pressed);
             break;
         case ControlPadStateLeft:
             stateInGP2XValue = GP2X_LEFT;

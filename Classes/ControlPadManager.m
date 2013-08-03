@@ -132,6 +132,88 @@ unsigned long padStatusForPadNumber(int which)
 }
 
 #pragma mark -
+#pragma mark ControlPadEventDelegate
+
+enum  { GP2X_UP=0x1,       GP2X_LEFT=0x4,       GP2X_DOWN=0x10,  GP2X_RIGHT=0x40,
+	GP2X_START=1<<8,   GP2X_SELECT=1<<9,    GP2X_L=1<<10,    GP2X_R=1<<11,
+	GP2X_A=1<<12,      GP2X_B=1<<13,        GP2X_X=1<<14,    GP2X_Y=1<<15,
+	GP2X_VOL_UP=1<<23, GP2X_VOL_DOWN=1<<22, GP2X_PUSH=1<<27 };
+
+- (void)padChangedState:(ControlPadState)changedState pressed:(BOOL)pressed;
+{
+    static unsigned long padState = 0;
+    
+    unsigned long stateInGP2XValue = 0;
+    
+    /*
+     A        SELECT
+     B        LEFT SHOULDER
+     C        START
+     D        RIGHT SHOULDER
+     E        Y
+     F        A
+     G        B
+     H        X
+     */
+    
+    switch (changedState) {
+        case ControlPadStateNone:
+            stateInGP2XValue = 0;
+            break;
+        case ControlPadStateUp:
+            stateInGP2XValue = GP2X_UP;
+            break;
+        case ControlPadStateDown:
+            stateInGP2XValue = GP2X_DOWN;
+            break;
+        case ControlPadStateLeft:
+            stateInGP2XValue = GP2X_LEFT;
+            break;
+        case ControlPadStateRight:
+            stateInGP2XValue = GP2X_RIGHT;
+            break;
+        case ControlPadStateButtonA:
+            stateInGP2XValue = GP2X_SELECT;
+            break;
+        case ControlPadStateButtonB:
+            stateInGP2XValue = GP2X_L;
+            break;
+        case ControlPadStateButtonC:
+            stateInGP2XValue = GP2X_START;
+            break;
+        case ControlPadStateButtonD:
+            stateInGP2XValue = GP2X_R;
+            break;
+        case ControlPadStateButtonE:
+            stateInGP2XValue = GP2X_Y;
+            break;
+        case ControlPadStateButtonF:
+            stateInGP2XValue = GP2X_A;
+            break;
+        case ControlPadStateButtonG:
+            stateInGP2XValue = GP2X_B;
+            break;
+        case ControlPadStateButtonH:
+            stateInGP2XValue = GP2X_X;
+            break;
+        case ControlPadStateDownLeft:
+        case ControlPadStateDownRight:
+        case ControlPadStateUpLeft:
+        case ControlPadStateUpRight:
+        default:
+            NSLog(@"%s Compound pad movement sent, but was unhandled.", __PRETTY_FUNCTION__);
+            break;
+    }
+    
+    if (pressed)
+        padState |= stateInGP2XValue;
+    else
+        padState ^= stateInGP2XValue;
+    
+    [self convertData:[NSData dataWithBytes:&padState length:sizeof(padState)] padNumber:0];
+}
+
+#pragma mark -
 #pragma mark GKSession Delegate methods
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state {
 	NSLog(@"Session state changed");

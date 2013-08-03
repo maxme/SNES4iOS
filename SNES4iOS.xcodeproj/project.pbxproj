@@ -14,6 +14,8 @@
 		2804200B108E984D000629CD /* RomSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28042008108E984D000629CD /* RomSelectionViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2804200C108E984D000629CD /* RomDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804200A108E984D000629CD /* RomDetailViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		520D7C3E1618A9C4009306B7 /* iCadeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 520D7C3C1618A9C4009306B7 /* iCadeReaderView.m */; };
+		520D7C441618AA10009306B7 /* iCadeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 520D7C431618AA10009306B7 /* iCadeViewController.m */; };
 		6C3CE6EB135BCD0400D61F53 /* IOSurface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C3CE6EA135BCD0400D61F53 /* IOSurface.framework */; };
 		6CD00F45135FED04003E789A /* libpocketsnes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD00F44135FED04003E789A /* libpocketsnes.a */; };
 		6CD00F60135FEE9C003E789A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD00F5F135FEE9C003E789A /* AudioToolbox.framework */; };
@@ -101,6 +103,12 @@
 		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28A0AAE50D9B0CCF005BE974 /* SNES4iOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNES4iOS_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		520D7C3B1618A9C4009306B7 /* iCadeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeReaderView.h; sourceTree = "<group>"; };
+		520D7C3C1618A9C4009306B7 /* iCadeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCadeReaderView.m; sourceTree = "<group>"; };
+		520D7C3D1618A9C4009306B7 /* iCadeState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeState.h; sourceTree = "<group>"; };
+		520D7C411618AA10009306B7 /* ControlPadEventDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPadEventDelegate.h; sourceTree = "<group>"; };
+		520D7C421618AA10009306B7 /* iCadeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeViewController.h; sourceTree = "<group>"; };
+		520D7C431618AA10009306B7 /* iCadeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCadeViewController.m; sourceTree = "<group>"; };
 		6C3CE6EA135BCD0400D61F53 /* IOSurface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOSurface.framework; path = System/Library/PrivateFrameworks/IOSurface.framework; sourceTree = SDKROOT; };
 		6CD00F44135FED04003E789A /* libpocketsnes.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpocketsnes.a; path = src/snes4iphone_src/libpocketsnes.a; sourceTree = "<group>"; };
 		6CD00F5F135FEE9C003E789A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -226,6 +234,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				520D7C411618AA10009306B7 /* ControlPadEventDelegate.h */,
+				520D7C421618AA10009306B7 /* iCadeViewController.h */,
+				520D7C431618AA10009306B7 /* iCadeViewController.m */,
 				1D3623240D0F684500981E51 /* SNES4iOSAppDelegate.h */,
 				1D3623250D0F684500981E51 /* SNES4iOSAppDelegate.m */,
 				28042007108E984D000629CD /* RomSelectionViewController.h */,
@@ -270,6 +281,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				CE43A4CC119DFEF70007E399 /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				520D7C401618A9F1009306B7 /* External Libraries */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -305,6 +317,24 @@
 				6CD00F63135FEEBA003E789A /* libz.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		520D7C3A1618A9C4009306B7 /* iCade */ = {
+			isa = PBXGroup;
+			children = (
+				520D7C3B1618A9C4009306B7 /* iCadeReaderView.h */,
+				520D7C3C1618A9C4009306B7 /* iCadeReaderView.m */,
+				520D7C3D1618A9C4009306B7 /* iCadeState.h */,
+			);
+			path = iCade;
+			sourceTree = "<group>";
+		};
+		520D7C401618A9F1009306B7 /* External Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				520D7C3A1618A9C4009306B7 /* iCade */,
+			);
+			name = "External Libraries";
 			sourceTree = "<group>";
 		};
 		BF7B7A0C14A64BEE00014E61 /* SNES Controller */ = {
@@ -552,6 +582,8 @@
 				BF7B7A0914A64BEA00014E61 /* SessionController.m in Sources */,
 				BF7B7A0A14A64BEA00014E61 /* SNESControllerAppDelegate.m in Sources */,
 				BF7B7A0B14A64BEA00014E61 /* SNESControllerViewController.m in Sources */,
+				520D7C3E1618A9C4009306B7 /* iCadeReaderView.m in Sources */,
+				520D7C441618AA10009306B7 /* iCadeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
